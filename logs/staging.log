@@ -1,0 +1,7 @@
+2025-03-08 15:17:39 - Starting AddressBookAppApplication using Java 23.0.2 with PID 9720 (C:\Users\deves\Documents\Spring Boot\SpringBoot-Initializer5\AddressBookApp\target\classes started by deves in C:\Users\deves\Documents\Spring Boot\SpringBoot-Initializer5\AddressBookApp)
+2025-03-08 15:17:39 - Running with Spring Boot v3.4.3, Spring v6.2.3
+2025-03-08 15:17:39 - The following 1 profile is active: "staging"
+2025-03-08 15:17:42 - HHH90000025: MySQL8Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-08 15:17:42 - HHH90000026: MySQL8Dialect has been deprecated; use org.hibernate.dialect.MySQLDialect instead
+2025-03-08 15:17:44 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-08 15:17:44 - Started AddressBookAppApplication in 5.428 seconds (process running for 6.31)

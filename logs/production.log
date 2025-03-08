@@ -1,0 +1,4 @@
+2025-03-08 15:17:18 - Starting AddressBookAppApplication using Java 23.0.2 with PID 19888 (C:\Users\deves\Documents\Spring Boot\SpringBoot-Initializer5\AddressBookApp\target\classes started by deves in C:\Users\deves\Documents\Spring Boot\SpringBoot-Initializer5\AddressBookApp)
+2025-03-08 15:17:18 - Running with Spring Boot v3.4.3, Spring v6.2.3
+2025-03-08 15:17:18 - The following 1 profile is active: "prod"
+2025-03-08 15:17:23 - Started AddressBookAppApplication in 5.514 seconds (process running for 6.415)
