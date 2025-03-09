@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @RequestMapping("/contacts")
 public class ContactController {
 
-    ContactServiceImpl contactService;
+    private final ContactServiceImpl contactService;
 
     @Autowired
     public ContactController(ContactServiceImpl contactService) {
@@ -29,46 +29,48 @@ public class ContactController {
     }
 
     @GetMapping("/all")
-    public List<ContactDTO> getAllContacts() {
-        return contactService.getAllContacts();
+    public ResponseEntity<?> getAllContacts() {
+        return ResponseEntity.ok(contactService.getAllContacts());
     }
 
     @GetMapping("/get/{id}")
-    public ContactDTO getContactById(@PathVariable int id) {
-        return contactService.getContactById(id);
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<?> addContact(@RequestBody ContactDTO contactDTO) {
+    public ResponseEntity<?> getContactById(@PathVariable int id) {
         try {
-            // Manual validation
-            if (contactDTO.getName() == null || contactDTO.getName().trim().isEmpty()) {
-                return ResponseEntity.badRequest().body(Map.of("error", "Name cannot be empty"));
-            }
-
-            ContactDTO savedContact = contactService.addContact(contactDTO);
-            return ResponseEntity.ok(savedContact);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "Something went wrong"));
+            return ResponseEntity.ok(contactService.getContactById(id));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", e.getMessage()));
         }
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<?> addContact(@Valid @RequestBody ContactDTO contactDTO) {
+        try {
+            return ResponseEntity.ok(contactService.addContact(contactDTO));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", e.getMessage()));
+        }
+    }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateContact(@PathVariable int id, @Valid @RequestBody ContactDTO updatedContact) {
         try {
-            ContactDTO updated = contactService.updateContact(id, updatedContact);
-            return ResponseEntity.ok(updated);
-        } catch (RuntimeException e) {  // Handling not found exception
+            return ResponseEntity.ok(contactService.updateContact(id, updatedContact));
+        } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", e.getMessage()));
-        } catch (Exception e) {  // Generic error handling
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "Something went wrong"));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", e.getMessage()));
         }
     }
 
-
     @DeleteMapping("/delete/{id}")
-    public void deleteContact(@PathVariable int id) {
-        contactService.deleteContact(id);
+    public ResponseEntity<?> deleteContact(@PathVariable int id) {
+        try {
+            contactService.deleteContact(id);
+            return ResponseEntity.ok(Map.of("message", "Contact deleted successfully"));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", e.getMessage()));
+        }
     }
 }

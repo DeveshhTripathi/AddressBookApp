@@ -841,3 +841,19 @@ Caused by: java.sql.SQLException: Access denied for user '${root}'@'localhost' (
 2025-03-09 17:01:17 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
 2025-03-09 17:01:18 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
 2025-03-09 17:01:18 - Started AddressBookAppApplication in 3.685 seconds (process running for 4.329)
+2025-03-09 17:29:22 - Starting AddressBookAppApplication using Java 23.0.2 with PID 9568 (C:\Users\deves\Documents\Spring Boot\SpringBoot-Initializer5\AddressBookApp\target\classes started by deves in C:\Users\deves\Documents\Spring Boot\SpringBoot-Initializer5\AddressBookApp)
+2025-03-09 17:29:22 - Running with Spring Boot v3.4.3, Spring v6.2.3
+2025-03-09 17:29:22 - The following 1 profile is active: "staging"
+2025-03-09 17:29:24 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-09 17:29:25 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-09 17:29:26 - Started AddressBookAppApplication in 3.649 seconds (process running for 4.318)
+2025-03-09 17:31:04 - Starting AddressBookAppApplication using Java 23.0.2 with PID 11348 (C:\Users\deves\Documents\Spring Boot\SpringBoot-Initializer5\AddressBookApp\target\classes started by deves in C:\Users\deves\Documents\Spring Boot\SpringBoot-Initializer5\AddressBookApp)
+2025-03-09 17:31:04 - Running with Spring Boot v3.4.3, Spring v6.2.3
+2025-03-09 17:31:04 - The following 1 profile is active: "staging"
+2025-03-09 17:31:05 - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-03-09 17:31:06 - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-03-09 17:31:06 - Started AddressBookAppApplication in 3.157 seconds (process running for 3.731)
+2025-03-09 17:31:20 - Fetching all contacts
+2025-03-09 17:31:31 - Fetching contact with ID: 3
+2025-03-09 17:31:34 - Fetching contact with ID: 4
+2025-03-09 17:31:34 - Contact with ID 4 not found
