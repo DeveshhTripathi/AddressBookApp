@@ -1,10 +1,10 @@
 package com.example.AddressBookApp.repository;
 
-
-import com.example.AddressBookApp.model.Contact;
+import com.example.AddressBookApp.model.ContactEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface ContactRepository extends JpaRepository<Contact, Integer> {
+public interface ContactRepository extends JpaRepository<ContactEntity, Long> {
+
+    public ContactEntity findByEmail(String email);
+
 }

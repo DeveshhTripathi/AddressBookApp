@@ -1,10 +1,13 @@
 package com.example.AddressBookApp.repository;
 
-import com.example.AddressBookApp.model.User;
+import com.example.AddressBookApp.model.AuthUser;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByEmail(String email);
+@Repository
+public interface UserRepository extends JpaRepository<AuthUser, Long> {
+
+    public AuthUser findByEmail(String email);
+
 }

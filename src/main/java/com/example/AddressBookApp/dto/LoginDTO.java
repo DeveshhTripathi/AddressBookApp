@@ -2,29 +2,27 @@ package com.example.AddressBookApp.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class ContactDTO {
+public class LoginDTO {
 
-    String name;
-
-    @Email
-    @NotBlank
+    @Email(message = "User email not correct")
+    @NotBlank(message = "email required")
     String email;
 
-    Long phoneNumber;
+    @NotBlank(message = "password required")
+    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$", message = "invalid password")
+    String password;
 
-    String address;
 
-    Long id;
 
 }
