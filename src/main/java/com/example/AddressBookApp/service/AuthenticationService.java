@@ -6,6 +6,8 @@ import com.example.AddressBookApp.dto.PassDTO;
 import com.example.AddressBookApp.interfaces.IAuthInterface;
 import com.example.AddressBookApp.model.AuthUser;
 import com.example.AddressBookApp.repository.UserRepository;
+import com.example.AddressBookApp.service.JwtTokenService;
+import com.example.AddressBookApp.service.RedisTokenService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.Cookie;
@@ -61,7 +63,7 @@ public class AuthenticationService implements IAuthInterface {
 
             log.info("User saved in database : {}", getJSON(newUser));
 
-            //sending the custom message to Message Producer
+            //sending the custom message to Message Producer( Rabbit MQ)
             String customMessage = "REGISTER|"+user.getEmail()+"|"+user.getFirstName();
             messageProducer.sendMessage(customMessage);
 
@@ -91,19 +93,9 @@ public class AuthenticationService implements IAuthInterface {
             //creating Jwt Token
             String token = jwtTokenService.createToken(foundUser.getId());
 
-            //store the token generated in cookies
-            ResponseCookie resCookie = ResponseCookie.from("jwt", token)
-                    .httpOnly(true)
-                    .secure(false)      //set to true but for local host set it to false as local host sent uses HTTP request
-                    .path("/")
-                    .maxAge(3600)
-                    .sameSite("Strict")
-                    .build();
-
-            response.addHeader(HttpHeaders.SET_COOKIE, resCookie.toString());
-
-            //store the token in redis server as well
-            redisTokenService.saveToken(foundUser.getId().toString(), token);   //(key:useId, value: token)
+            //setting token in header of response
+            System.out.println(token);
+            response.addHeader("Authorization", "Bearer : "+token);
 
             //setting token for user login
             foundUser.setToken(token);
@@ -116,7 +108,7 @@ public class AuthenticationService implements IAuthInterface {
             return "user logged in" + "\ntoken : " + token;
         }
         catch(RuntimeException e){
-            log.error("User already registered with email: {} Exception : {}", user.getEmail(), e);
+            log.error("User not registered with email: {} Exception : {}", user.getEmail(), e);
         }
         return null;
 

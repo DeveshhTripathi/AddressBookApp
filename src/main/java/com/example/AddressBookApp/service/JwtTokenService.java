@@ -8,6 +8,9 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 @Service
 public class JwtTokenService {
 
@@ -18,9 +21,13 @@ public class JwtTokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(TOKEN_SECRET);
 
+            long expirationMillis = System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1);
+
             String token = JWT.create()
                     .withClaim("user_id", id)
+                    .withExpiresAt(new Date(expirationMillis))
                     .sign(algorithm);
+
             return token;
 
         } catch (JWTCreationException exception) {
